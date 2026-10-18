@@ -1,0 +1,148 @@
+{
+  "test": "merge_R <= 0.50",
+  "feature": "merge_R",
+  "threshold": 0.5,
+  "left": {
+    "test": "empties <= 0.50",
+    "feature": "empties",
+    "threshold": 0.5,
+    "left": {
+      "action": 1,
+      "n": 8
+    },
+    "right": {
+      "test": "r0c2 <= 1.50",
+      "feature": "r0c2",
+      "threshold": 1.5,
+      "left": {
+        "test": "r0c0 <= 0.50",
+        "feature": "r0c0",
+        "threshold": 0.5,
+        "left": {
+          "action": 1,
+          "n": 13
+        },
+        "right": {
+          "test": "r0c1 <= 1.50",
+          "feature": "r0c1",
+          "threshold": 1.5,
+          "left": {
+            "action": 0,
+            "n": 14
+          },
+          "right": {
+            "test": "merge_val <= 4.00",
+            "feature": "merge_val",
+            "threshold": 4.0,
+            "left": {
+              "action": 1,
+              "n": 8
+            },
+            "right": {
+              "action": 1,
+              "n": 8
+            }
+          }
+        }
+      },
+      "right": {
+        "test": "snake <= 6.59",
+        "feature": "snake",
+        "threshold": 6.5916666984558105,
+        "left": {
+          "action": 0,
+          "n": 15
+        },
+        "right": {
+          "test": "merge_val <= 5.50",
+          "feature": "merge_val",
+          "threshold": 5.5,
+          "left": {
+            "action": 1,
+            "n": 8
+          },
+          "right": {
+            "action": 0,
+            "n": 10
+          }
+        }
+      }
+    }
+  },
+  "right": {
+    "test": "empties <= 2.50",
+    "feature": "empties",
+    "threshold": 2.5,
+    "left": {
+      "test": "r1c1 <= 5.50",
+      "feature": "r1c1",
+      "threshold": 5.5,
+      "left": {
+        "test": "mono <= -23.50",
+        "feature": "mono",
+        "threshold": -23.5,
+        "left": {
+          "action": 0,
+          "n": 12
+        },
+        "right": {
+          "action": 0,
+          "n": 31
+        }
+      },
+      "right": {
+        "test": "merge_val <= 3.50",
+        "feature": "merge_val",
+        "threshold": 3.5,
+        "left": {
+          "action": 0,
+          "n": 8
+        },
+        "right": {
+          "test": "r1c3 <= 2.50",
+          "feature": "r1c3",
+          "threshold": 2.5,
+          "left": {
+            "action": 0,
+            "n": 8
+          },
+          "right": {
+            "action": 0,
+            "n": 10
+          }
+        }
+      }
+    },
+    "right": {
+      "test": "r1c3 <= 2.50",
+      "feature": "r1c3",
+      "threshold": 2.5,
+      "left": {
+        "test": "r2c3 <= 2.50",
+        "feature": "r2c3",
+        "threshold": 2.5,
+        "left": {
+          "test": "r3c3 <= 0.50",
+          "feature": "r3c3",
+          "threshold": 0.5,
+          "left": {
+            "action": 0,
+            "n": 8
+          },
+          "right": {
+            "action": 0,
+            "n": 10
+          }
+        },
+        "right": {
+          "action": 0,
+          "n": 9
+        }
+      },
+      "right": {
+        "action": 0,
+        "n": 12
+      }
+    }
+  }
+}

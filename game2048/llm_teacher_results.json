@@ -1,0 +1,24 @@
+{
+  "states": 240,
+  "llm_valid": 240,
+  "llm_vs_search_agree": 0.3,
+  "tree_holdout_agree": 0.6875,
+  "leaves": 17,
+  "games": [
+    {
+      "max": 128,
+      "moves": 124
+    },
+    {
+      "max": 64,
+      "moves": 113
+    },
+    {
+      "max": 256,
+      "moves": 219
+    }
+  ],
+  "calls": 30,
+  "tokens_in": 14314,
+  "tokens_out": 737
+}
