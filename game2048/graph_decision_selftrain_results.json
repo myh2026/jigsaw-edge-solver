@@ -1,0 +1,649 @@
+{
+  "history": [
+    {
+      "ep": 1,
+      "train_max": 256,
+      "agree": 0.32625,
+      "val": 149.33333333333334,
+      "leaves": 58,
+      "coverage": 0.8092643051771117,
+      "new_samples": 277,
+      "verdict": "回滚"
+    },
+    {
+      "ep": 2,
+      "train_max": 256,
+      "agree": 0.32625,
+      "val": 149.33333333333334,
+      "leaves": 58,
+      "coverage": 0.8128342245989305,
+      "new_samples": 265,
+      "verdict": "回滚"
+    },
+    {
+      "ep": 3,
+      "train_max": 128,
+      "agree": 0.32625,
+      "val": 149.33333333333334,
+      "leaves": 58,
+      "coverage": 0.8310502283105022,
+      "new_samples": 156,
+      "verdict": "回滚"
+    },
+    {
+      "ep": 4,
+      "train_max": 128,
+      "agree": 0.32625,
+      "val": 149.33333333333334,
+      "leaves": 58,
+      "coverage": 0.8023715415019763,
+      "new_samples": 181,
+      "verdict": "回滚"
+    },
+    {
+      "ep": 5,
+      "train_max": 256,
+      "agree": 0.32625,
+      "val": 149.33333333333334,
+      "leaves": 58,
+      "coverage": 0.8037974683544303,
+      "new_samples": 215,
+      "verdict": "回滚"
+    },
+    {
+      "ep": 6,
+      "train_max": 128,
+      "agree": 0.32625,
+      "val": 149.33333333333334,
+      "leaves": 58,
+      "coverage": 0.8125,
+      "new_samples": 165,
+      "verdict": "回滚"
+    },
+    {
+      "ep": 7,
+      "train_max": 128,
+      "agree": 0.32625,
+      "val": 149.33333333333334,
+      "leaves": 58,
+      "coverage": 0.8091286307053942,
+      "new_samples": 188,
+      "verdict": "回滚"
+    },
+    {
+      "ep": 8,
+      "train_max": 128,
+      "agree": 0.32625,
+      "val": 149.33333333333334,
+      "leaves": 58,
+      "coverage": 0.8149779735682819,
+      "new_samples": 167,
+      "verdict": "回滚"
+    },
+    {
+      "ep": 9,
+      "train_max": 256,
+      "agree": 0.32625,
+      "val": 149.33333333333334,
+      "leaves": 58,
+      "coverage": 0.8355263157894737,
+      "new_samples": 228,
+      "verdict": "回滚"
+    },
+    {
+      "ep": 10,
+      "train_max": 256,
+      "agree": 0.32625,
+      "val": 149.33333333333334,
+      "leaves": 58,
+      "coverage": 0.8075801749271136,
+      "new_samples": 250,
+      "verdict": "回滚"
+    },
+    {
+      "ep": 11,
+      "train_max": 256,
+      "agree": 0.32625,
+      "val": 149.33333333333334,
+      "leaves": 58,
+      "coverage": 0.816711590296496,
+      "new_samples": 281,
+      "verdict": "回滚"
+    },
+    {
+      "ep": 12,
+      "train_max": 256,
+      "agree": 0.32625,
+      "val": 149.33333333333334,
+      "leaves": 58,
+      "coverage": 0.8,
+      "new_samples": 301,
+      "verdict": "回滚"
+    }
+  ],
+  "final_val": 133.33333333333334,
+  "final_games": [
+    128,
+    16,
+    256
+  ],
+  "agreement": 0.32625,
+  "leaves": 58,
+  "tree": {
+    "test": "snake <= 6.88",
+    "feature": "snake",
+    "threshold": 6.875,
+    "left": {
+      "test": "corner_max <= 0.50",
+      "feature": "corner_max",
+      "threshold": 0.5,
+      "left": {
+        "test": "snake <= 5.56",
+        "feature": "snake",
+        "threshold": 5.558333396911621,
+        "left": {
+          "test": "merge_D <= 0.50",
+          "feature": "merge_D",
+          "threshold": 0.5,
+          "left": {
+            "test": "merge_val <= 3.50",
+            "feature": "merge_val",
+            "threshold": 3.5,
+            "left": {
+              "test": "r3c1 <= 2.50",
+              "feature": "r3c1",
+              "threshold": 2.5,
+              "left": {
+                "action": 1,
+                "n": 162
+              },
+              "right": {
+                "action": 0,
+                "n": 80
+              }
+            },
+            "right": {
+              "test": "r0c0 <= 0.50",
+              "feature": "r0c0",
+              "threshold": 0.5,
+              "left": {
+                "action": 1,
+                "n": 55
+              },
+              "right": {
+                "action": 3,
+                "n": 142
+              }
+            }
+          },
+          "right": {
+            "test": "merge_val <= 4.50",
+            "feature": "merge_val",
+            "threshold": 4.5,
+            "left": {
+              "test": "r0c1 <= 0.50",
+              "feature": "r0c1",
+              "threshold": 0.5,
+              "left": {
+                "action": 3,
+                "n": 77
+              },
+              "right": {
+                "action": 1,
+                "n": 121
+              }
+            },
+            "right": {
+              "test": "r1c3 <= 6.50",
+              "feature": "r1c3",
+              "threshold": 6.5,
+              "left": {
+                "action": 2,
+                "n": 484
+              },
+              "right": {
+                "action": 2,
+                "n": 31
+              }
+            }
+          }
+        },
+        "right": {
+          "test": "r3c3 <= 0.50",
+          "feature": "r3c3",
+          "threshold": 0.5,
+          "left": {
+            "test": "r2c0 <= 0.50",
+            "feature": "r2c0",
+            "threshold": 0.5,
+            "left": {
+              "test": "snake <= 5.99",
+              "feature": "snake",
+              "threshold": 5.991666555404663,
+              "left": {
+                "action": 3,
+                "n": 12
+              },
+              "right": {
+                "action": 1,
+                "n": 22
+              }
+            },
+            "right": {
+              "test": "mono <= -15.50",
+              "feature": "mono",
+              "threshold": -15.5,
+              "left": {
+                "action": 3,
+                "n": 267
+              },
+              "right": {
+                "action": 3,
+                "n": 56
+              }
+            }
+          },
+          "right": {
+            "test": "r2c1 <= 1.50",
+            "feature": "r2c1",
+            "threshold": 1.5,
+            "left": {
+              "test": "r0c1 <= 0.50",
+              "feature": "r0c1",
+              "threshold": 0.5,
+              "left": {
+                "action": 0,
+                "n": 27
+              },
+              "right": {
+                "action": 1,
+                "n": 180
+              }
+            },
+            "right": {
+              "test": "r2c3 <= 3.50",
+              "feature": "r2c3",
+              "threshold": 3.5,
+              "left": {
+                "action": 3,
+                "n": 826
+              },
+              "right": {
+                "action": 1,
+                "n": 326
+              }
+            }
+          }
+        }
+      },
+      "right": {
+        "test": "merge_R <= 0.50",
+        "feature": "merge_R",
+        "threshold": 0.5,
+        "left": {
+          "test": "r1c2 <= 0.50",
+          "feature": "r1c2",
+          "threshold": 0.5,
+          "left": {
+            "test": "r1c0 <= 0.50",
+            "feature": "r1c0",
+            "threshold": 0.5,
+            "left": {
+              "action": 1,
+              "n": 14
+            },
+            "right": {
+              "action": 2,
+              "n": 21
+            }
+          },
+          "right": {
+            "test": "r2c0 <= 0.50",
+            "feature": "r2c0",
+            "threshold": 0.5,
+            "left": {
+              "test": "r1c2 <= 4.50",
+              "feature": "r1c2",
+              "threshold": 4.5,
+              "left": {
+                "action": 3,
+                "n": 19
+              },
+              "right": {
+                "action": 0,
+                "n": 19
+              }
+            },
+            "right": {
+              "test": "r3c1 <= 2.50",
+              "feature": "r3c1",
+              "threshold": 2.5,
+              "left": {
+                "action": 1,
+                "n": 72
+              },
+              "right": {
+                "action": 3,
+                "n": 25
+              }
+            }
+          }
+        },
+        "right": {
+          "test": "merge_val <= 3.50",
+          "feature": "merge_val",
+          "threshold": 3.5,
+          "left": {
+            "test": "smooth <= -50.50",
+            "feature": "smooth",
+            "threshold": -50.5,
+            "left": {
+              "test": "r0c2 <= 1.50",
+              "feature": "r0c2",
+              "threshold": 1.5,
+              "left": {
+                "action": 2,
+                "n": 12
+              },
+              "right": {
+                "action": 3,
+                "n": 17
+              }
+            },
+            "right": {
+              "test": "r0c1 <= 1.50",
+              "feature": "r0c1",
+              "threshold": 1.5,
+              "left": {
+                "action": 3,
+                "n": 37
+              },
+              "right": {
+                "action": 1,
+                "n": 21
+              }
+            }
+          },
+          "right": {
+            "test": "r1c1 <= 6.50",
+            "feature": "r1c1",
+            "threshold": 6.5,
+            "left": {
+              "test": "snake <= 6.21",
+              "feature": "snake",
+              "threshold": 6.208333253860474,
+              "left": {
+                "action": 1,
+                "n": 147
+              },
+              "right": {
+                "action": 1,
+                "n": 124
+              }
+            },
+            "right": {
+              "test": "r3c0 <= 5.50",
+              "feature": "r3c0",
+              "threshold": 5.5,
+              "left": {
+                "action": 3,
+                "n": 20
+              },
+              "right": {
+                "action": 1,
+                "n": 17
+              }
+            }
+          }
+        }
+      }
+    },
+    "right": {
+      "test": "snake <= 8.16",
+      "feature": "snake",
+      "threshold": 8.15833330154419,
+      "left": {
+        "test": "r0c3 <= 9.50",
+        "feature": "r0c3",
+        "threshold": 9.5,
+        "left": {
+          "test": "r0c2 <= 7.50",
+          "feature": "r0c2",
+          "threshold": 7.5,
+          "left": {
+            "test": "smooth <= -36.50",
+            "feature": "smooth",
+            "threshold": -36.5,
+            "left": {
+              "test": "r3c3 <= 9.50",
+              "feature": "r3c3",
+              "threshold": 9.5,
+              "left": {
+                "action": 0,
+                "n": 1358
+              },
+              "right": {
+                "action": 2,
+                "n": 109
+              }
+            },
+            "right": {
+              "test": "r0c2 <= 1.50",
+              "feature": "r0c2",
+              "threshold": 1.5,
+              "left": {
+                "action": 1,
+                "n": 23
+              },
+              "right": {
+                "action": 0,
+                "n": 33
+              }
+            }
+          },
+          "right": {
+            "test": "r0c2 <= 9.50",
+            "feature": "r0c2",
+            "threshold": 9.5,
+            "left": {
+              "test": "tile_count <= 14.50",
+              "feature": "tile_count",
+              "threshold": 14.5,
+              "left": {
+                "action": 3,
+                "n": 18
+              },
+              "right": {
+                "action": 3,
+                "n": 27
+              }
+            },
+            "right": {
+              "test": "snake <= 7.65",
+              "feature": "snake",
+              "threshold": 7.6499998569488525,
+              "left": {
+                "action": 3,
+                "n": 14
+              },
+              "right": {
+                "action": 2,
+                "n": 12
+              }
+            }
+          }
+        },
+        "right": {
+          "test": "r1c1 <= 4.50",
+          "feature": "r1c1",
+          "threshold": 4.5,
+          "left": {
+            "test": "merge_val <= 4.50",
+            "feature": "merge_val",
+            "threshold": 4.5,
+            "left": {
+              "action": 2,
+              "n": 12
+            },
+            "right": {
+              "test": "r1c0 <= 0.50",
+              "feature": "r1c0",
+              "threshold": 0.5,
+              "left": {
+                "action": 3,
+                "n": 26
+              },
+              "right": {
+                "action": 3,
+                "n": 26
+              }
+            }
+          },
+          "right": {
+            "action": 2,
+            "n": 14
+          }
+        }
+      },
+      "right": {
+        "test": "merge_D <= 0.50",
+        "feature": "merge_D",
+        "threshold": 0.5,
+        "left": {
+          "test": "r1c0 <= 1.50",
+          "feature": "r1c0",
+          "threshold": 1.5,
+          "left": {
+            "test": "r1c3 <= 4.50",
+            "feature": "r1c3",
+            "threshold": 4.5,
+            "left": {
+              "test": "r2c1 <= 4.50",
+              "feature": "r2c1",
+              "threshold": 4.5,
+              "left": {
+                "action": 2,
+                "n": 12
+              },
+              "right": {
+                "action": 0,
+                "n": 64
+              }
+            },
+            "right": {
+              "test": "r0c3 <= 2.50",
+              "feature": "r0c3",
+              "threshold": 2.5,
+              "left": {
+                "action": 1,
+                "n": 13
+              },
+              "right": {
+                "action": 3,
+                "n": 15
+              }
+            }
+          },
+          "right": {
+            "test": "r2c0 <= 1.50",
+            "feature": "r2c0",
+            "threshold": 1.5,
+            "left": {
+              "test": "smooth <= -66.00",
+              "feature": "smooth",
+              "threshold": -66.0,
+              "left": {
+                "action": 2,
+                "n": 13
+              },
+              "right": {
+                "action": 2,
+                "n": 27
+              }
+            },
+            "right": {
+              "test": "tile_count <= 15.50",
+              "feature": "tile_count",
+              "threshold": 15.5,
+              "left": {
+                "action": 0,
+                "n": 76
+              },
+              "right": {
+                "action": 2,
+                "n": 60
+              }
+            }
+          }
+        },
+        "right": {
+          "test": "merge_val <= 3.50",
+          "feature": "merge_val",
+          "threshold": 3.5,
+          "left": {
+            "test": "r0c0 <= 1.50",
+            "feature": "r0c0",
+            "threshold": 1.5,
+            "left": {
+              "test": "snake <= 8.59",
+              "feature": "snake",
+              "threshold": 8.59166669845581,
+              "left": {
+                "action": 1,
+                "n": 23
+              },
+              "right": {
+                "action": 3,
+                "n": 38
+              }
+            },
+            "right": {
+              "test": "r2c1 <= 5.50",
+              "feature": "r2c1",
+              "threshold": 5.5,
+              "left": {
+                "action": 1,
+                "n": 20
+              },
+              "right": {
+                "action": 1,
+                "n": 47
+              }
+            }
+          },
+          "right": {
+            "test": "r0c3 <= 8.50",
+            "feature": "r0c3",
+            "threshold": 8.5,
+            "left": {
+              "test": "smooth <= -57.50",
+              "feature": "smooth",
+              "threshold": -57.5,
+              "left": {
+                "action": 2,
+                "n": 133
+              },
+              "right": {
+                "action": 2,
+                "n": 196
+              }
+            },
+            "right": {
+              "test": "r0c2 <= 4.50",
+              "feature": "r0c2",
+              "threshold": 4.5,
+              "left": {
+                "action": 1,
+                "n": 42
+              },
+              "right": {
+                "action": 3,
+                "n": 31
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
