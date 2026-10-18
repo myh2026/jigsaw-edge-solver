@@ -1,0 +1,11 @@
+# 数据集与生成物不入库
+dataset/
+checkpoints/*.pt
+predictions*/
+previews/
+real_images_unsplash/
+runs/
+__pycache__/
+*.pyc
+*.pt
+.DS_Store
