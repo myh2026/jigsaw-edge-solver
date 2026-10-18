@@ -28,6 +28,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from loader import split_pieces
+from degrade import degrade_piece
 from solve_demo import edge_costs as l1_edge_costs
 
 ROOT = Path(__file__).resolve().parent
@@ -41,7 +42,7 @@ class EdgeNet(nn.Module):
     def __init__(self, hidden=64):
         super().__init__()
         self.body = nn.Sequential(
-            nn.Conv1d(6 * K_COLS, 32, kernel_size=5, padding=2), nn.ReLU(inplace=True),
+            nn.Conv1d(12 * K_COLS, 32, kernel_size=5, padding=2), nn.ReLU(inplace=True),
             nn.Conv1d(32, 64, kernel_size=5, padding=2, stride=2), nn.ReLU(inplace=True),
             nn.Conv1d(64, 64, kernel_size=3, padding=1), nn.ReLU(inplace=True),
         )
@@ -67,21 +68,35 @@ def _strip(arr, side):
     return s.transpose(1, 0, 2).reshape(s.shape[1], -1).T.astype(np.float32)
 
 
+def _invariant_strip(a):
+    """不变性特征：条带对比归一化（消独立亮度/对比度偏移）
+    + 沿边缘方向一阶差分（弱化 gamma 类单调非线性）。"""
+    a = a.astype(np.float32)
+    a = (a - a.mean()) / (a.std() + 1e-5)
+    d = np.diff(a, axis=1)
+    d = np.concatenate([d, np.zeros((d.shape[0], 1), dtype=np.float32)], axis=1)
+    return np.concatenate([a, d], axis=0)  # [6K, L]（原始归一化 + 一阶差分）
+
+
 def pair_input(piece_a, piece_b, direction):
-    """A 在 B 左（direction='h'）或 A 在 B 上（'v'）的 6 通道输入。"""
+    """A 在 B 左（direction='h'）或 A 在 B 上（'v'）的不变性输入。"""
     if direction == "h":
         a, b = _strip(piece_a, "r"), _strip(piece_b, "l")
     else:
         a, b = _strip(piece_a, "b"), _strip(piece_b, "t")
-    return np.concatenate([a, b], axis=0)  # [6, L]
+    return np.concatenate([_invariant_strip(a), _invariant_strip(b)], axis=0)  # [12K, ~L]
 
 
 def norm(x):
-    return (x / 255.0 - 0.5) / 0.5
+    return x  # 不变性特征在 pair_input 内完成归一化；此处保持接口恒等
 
 
-def image_pieces(img, rows, cols):
-    """原图切网格块并裁掉最外 1px（与推理 split_pieces(trim=1) 同宽）。"""
+def image_pieces(img, rows, cols, rng=None, max_sev=0.0):
+    """原图切网格块并裁掉最外 1px（与推理 split_pieces(trim=1) 同宽）。
+
+    rng/max_sev>0 时每块独立随机退化（severity~U(0,max_sev)，含 0=干净），
+    教网络对独立块级退化不变——模拟碎片独立获取的现实设置。
+    """
     w, h = img.size
     pw, ph = w // cols, h // rows
     out = []
@@ -89,11 +104,13 @@ def image_pieces(img, rows, cols):
         for c in range(cols):
             cell = img.crop((c * pw, r * ph, (c + 1) * pw, (r + 1) * ph))
             arr = np.asarray(cell)[1:-1, 1:-1, :]
+            if rng is not None and max_sev > 0:
+                arr = degrade_piece(arr, rng, rng.uniform(0.0, max_sev))
             out.append(arr)
     return out
 
 
-def build_pairs(paths, seed):
+def build_pairs(paths, seed, augment=0.0):
     """从原图生成正/负边缘对。正=真实相邻；负=同图不相邻 + 跨图。"""
     rng = random.Random(seed)
     pos, neg = [], []
@@ -101,8 +118,9 @@ def build_pairs(paths, seed):
     for p in paths:
         img = Image.open(p).convert("RGB")
         all_imgs.append(img)
+        aug = dict(rng=np.random.RandomState(seed + 997), max_sev=augment) if augment > 0 else {}
         for g in (3, 4, 5):
-            pieces = image_pieces(img, g, g)
+            pieces = image_pieces(img, g, g, **aug)
             for r in range(g):
                 for c in range(g):
                     i = r * g + c
@@ -111,7 +129,7 @@ def build_pairs(paths, seed):
                     if r + 1 < g:
                         pos.append(pair_input(pieces[i], pieces[i + g], "v"))
             # 难负样本：同行隔块 / 同列隔块（外观相近但不应相邻）
-            p3 = image_pieces(img, 3, 3)
+            p3 = image_pieces(img, 3, 3, **aug)
             for r in range(3):
                 for c in range(3):
                     i = r * 3 + c
@@ -144,8 +162,9 @@ def train():
     val_paths = [paths[i] for i in order[:val_n]]
     train_paths = [paths[i] for i in order[val_n:]]
 
-    pos, neg = build_pairs(train_paths, seed=11)
-    vpos, vneg = build_pairs(val_paths, seed=12)
+    augment = 1.5 if args.robust else 0.0
+    pos, neg = build_pairs(train_paths, seed=11, augment=augment)
+    vpos, vneg = build_pairs(val_paths, seed=12, augment=augment)
     print(f"训练对: 正 {len(pos)} 负 {len(neg)} | 验证对: 正 {len(vpos)} 负 {len(vneg)}")
 
     def batch(pairs, labels, bs=256):
@@ -165,7 +184,7 @@ def train():
     Y = [1.0] * len(pos) + [0.0] * len(neg)
     vX = vpos + vneg
     vY = [1.0] * len(vpos) + [0.0] * len(vneg)
-    for epoch in range(1, 17):
+    for epoch in range(1, 25):
         model.train()
         tot = n = 0.0
         for xb, yb in batch(X, Y):
@@ -180,18 +199,19 @@ def train():
                 correct += (pred == yb).float().sum().item(); cnt += len(yb)
         print(f"epoch {epoch}  loss {tot/n:.4f}  验证(未见原图) acc {correct/cnt:.4f}", flush=True)
     CKPT.parent.mkdir(exist_ok=True)
-    torch.save(model.state_dict(), CKPT)
-    print("saved", CKPT)
+    out_path = CKPT.parent / ("edge_net_robust.pt" if args.robust else "edge_net.pt")
+    torch.save(model.state_dict(), out_path)
+    print("saved", out_path)
 
 
 # ---------------------------------------------------------------- 求解器
 class EdgeNetSolver:
     """evaluate_model 的 --solver model 接口：predict(image, meta) -> 解格->输入块。"""
 
-    def __init__(self, rows=None, cols=None, beam=5):
+    def __init__(self, rows=None, cols=None, beam=5, ckpt=None):
         self.beam = beam
         self.net = EdgeNet()
-        state = torch.load(CKPT, map_location="cpu")
+        state = torch.load(ckpt or CKPT, map_location="cpu")
         self.net.load_state_dict(state)
         self.net.eval()
 
@@ -208,7 +228,9 @@ class EdgeNetSolver:
         alpha = 0.5
         alpha_path = CKPT.parent / "edge_net_alpha.json"
         if alpha_path.exists():
-            alpha = json.loads(alpha_path.read_text(encoding="utf-8"))["alpha"]
+            cfg = json.loads(alpha_path.read_text(encoding="utf-8"))
+            grid = int(getattr(self, "_current_rows", 0))
+            alpha = cfg.get(str(grid), cfg.get("default", 0.5))
         n = len(pieces)
         l1_right, l1_down = l1_edge_costs(pieces)
         net_right, net_down = self._net_costs(pieces)
@@ -281,6 +303,7 @@ class EdgeNetSolver:
 
     def predict(self, image, meta):
         rows, cols = meta["rows"], meta["cols"]
+        self._current_rows = rows
         pieces = [np.asarray(p) for p in split_pieces(image, rows, cols, trim_border=1)]
         return self._solve(pieces, rows, cols)
 
@@ -317,40 +340,48 @@ def beam_solve(pieces, rows, cols, right, down, beam=5):
 
 
 def calibrate():
+    """网格级校准（只用学习卷）：每个有学习样本的网格独立选 α；
+    未见过的网格回退保守 α=1.0（L1 主导）。写入 edge_net_alpha.json。"""
     """学习卷上校准混合权重 alpha（只用学习卷，不碰考试卷）。"""
     from loader import JigsawDataset, inverse_permutation
     from metrics import exact_match
     import json
 
     solver = EdgeNetSolver()
+    by_grid = {}
     ds = JigsawDataset("dataset", split="study")
-    results = {}
-    for alpha in (0.0, 0.25, 0.5, 0.75, 1.0):
-        exact = 0
-        for k in range(len(ds)):
-            img, perm, meta = ds[k]
-            rows, cols = meta["rows"], meta["cols"]
-            pieces = [np.asarray(p) for p in split_pieces(img, rows, cols, trim_border=1)]
-            n = rows * cols
-            l1r, l1d = l1_edge_costs(pieces)
-            nr, nd = solver._net_costs(pieces)
-            right = solver._mix(l1r, nr, alpha, n)
-            down = solver._mix(l1d, nd, alpha, n)
-            grid = beam_solve(pieces, rows, cols, right, down, beam=5)
-            target = inverse_permutation(meta["permutation"])
-            exact += exact_match(grid, target)
-        results[alpha] = exact / len(ds)
-        print("alpha=%.2f  study exact=%.3f" % (alpha, results[alpha]), flush=True)
-    best_alpha = max(results, key=results.get)
-    (CKPT.parent / "edge_net_alpha.json").write_text(
-        json.dumps({"alpha": best_alpha, "study_exact": results[best_alpha]}), encoding="utf-8")
-    print("best alpha =", best_alpha)
+    for k in range(len(ds)):
+        img, perm, meta = ds[k]
+        rows, cols = meta["rows"], meta["cols"]
+        by_grid.setdefault(int(rows), []).append((img, rows, cols, inverse_permutation(meta["permutation"])))
+    out = {"default": 1.0}
+    for g, items in sorted(by_grid.items()):
+        results = {}
+        for alpha in (0.0, 0.25, 0.5, 0.75, 1.0):
+            exact = 0
+            for img, rows, cols, target in items:
+                pieces = [np.asarray(p) for p in split_pieces(img, rows, cols, trim_border=1)]
+                n = rows * cols
+                l1r, l1d = l1_edge_costs(pieces)
+                nr, nd = solver._net_costs(pieces)
+                grid = beam_solve(pieces, rows, cols,
+                                  solver._mix(l1r, nr, alpha, n),
+                                  solver._mix(l1d, nd, alpha, n), beam=5)
+                exact += exact_match(grid, target)
+            results[alpha] = exact / len(items)
+        best_alpha = max(results, key=results.get)
+        out[str(g)] = best_alpha
+        print("grid %dx%d: " % (g, g) + " ".join(
+            "a=%.2f->%.3f" % (a, r) for a, r in results.items()) + "  best %.2f" % best_alpha, flush=True)
+    (CKPT.parent / "edge_net_alpha.json").write_text(json.dumps(out), encoding="utf-8")
+    print("grid-level alphas:", out)
 
 
 if __name__ == "__main__":
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--train", action="store_true")
+    ap.add_argument("--robust", action="store_true", help="退化增强训练（保存 edge_net_robust.pt）")
     ap.add_argument("--calibrate", action="store_true")
     args = ap.parse_args()
     if args.train:
