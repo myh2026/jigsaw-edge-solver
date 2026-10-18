@@ -1,0 +1,179 @@
+{
+  "episodes": 15,
+  "history": [
+    {
+      "episode": 1,
+      "max": 512,
+      "moves": 376,
+      "coverage": 0.0,
+      "rules": 130,
+      "changes": 130,
+      "teacher_calls": 376,
+      "verdict": "保留"
+    },
+    {
+      "episode": 2,
+      "max": 128,
+      "moves": 111,
+      "coverage": 0.6486486486486487,
+      "rules": 52,
+      "changes": 52,
+      "teacher_calls": 39,
+      "verdict": "回滚"
+    },
+    {
+      "episode": 3,
+      "max": 512,
+      "moves": 470,
+      "coverage": 0.11914893617021277,
+      "rules": 196,
+      "changes": 154,
+      "teacher_calls": 414,
+      "verdict": "保留"
+    },
+    {
+      "episode": 4,
+      "max": 256,
+      "moves": 228,
+      "coverage": 0.5614035087719298,
+      "rules": 128,
+      "changes": 84,
+      "teacher_calls": 100,
+      "verdict": "回滚"
+    },
+    {
+      "episode": 5,
+      "max": 128,
+      "moves": 142,
+      "coverage": 0.5985915492957746,
+      "rules": 100,
+      "changes": 58,
+      "teacher_calls": 57,
+      "verdict": "回滚"
+    },
+    {
+      "episode": 6,
+      "max": 128,
+      "moves": 127,
+      "coverage": 0.44881889763779526,
+      "rules": 102,
+      "changes": 65,
+      "teacher_calls": 70,
+      "verdict": "回滚"
+    },
+    {
+      "episode": 7,
+      "max": 512,
+      "moves": 486,
+      "coverage": 0.14814814814814814,
+      "rules": 218,
+      "changes": 133,
+      "teacher_calls": 414,
+      "verdict": "保留"
+    },
+    {
+      "episode": 8,
+      "max": 128,
+      "moves": 115,
+      "coverage": 0.5391304347826087,
+      "rules": 140,
+      "changes": 51,
+      "teacher_calls": 53,
+      "verdict": "回滚"
+    },
+    {
+      "episode": 9,
+      "max": 1024,
+      "moves": 927,
+      "coverage": 0.10787486515641856,
+      "rules": 280,
+      "changes": 165,
+      "teacher_calls": 827,
+      "verdict": "保留"
+    },
+    {
+      "episode": 10,
+      "max": 128,
+      "moves": 139,
+      "coverage": 0.6402877697841727,
+      "rules": 176,
+      "changes": 53,
+      "teacher_calls": 50,
+      "verdict": "回滚"
+    },
+    {
+      "episode": 11,
+      "max": 256,
+      "moves": 250,
+      "coverage": 0.372,
+      "rules": 207,
+      "changes": 84,
+      "teacher_calls": 157,
+      "verdict": "回滚"
+    },
+    {
+      "episode": 12,
+      "max": 128,
+      "moves": 155,
+      "coverage": 0.6193548387096774,
+      "rules": 173,
+      "changes": 47,
+      "teacher_calls": 59,
+      "verdict": "回滚"
+    },
+    {
+      "episode": 13,
+      "max": 128,
+      "moves": 160,
+      "coverage": 0.76875,
+      "rules": 163,
+      "changes": 44,
+      "teacher_calls": 37,
+      "verdict": "回滚"
+    },
+    {
+      "episode": 14,
+      "max": 128,
+      "moves": 178,
+      "coverage": 0.6629213483146067,
+      "rules": 176,
+      "changes": 52,
+      "teacher_calls": 60,
+      "verdict": "回滚"
+    },
+    {
+      "episode": 15,
+      "max": 1024,
+      "moves": 716,
+      "coverage": 0.17597765363128492,
+      "rules": 302,
+      "changes": 172,
+      "teacher_calls": 590,
+      "verdict": "保留"
+    }
+  ],
+  "final_games": [
+    {
+      "moves": 257,
+      "max": 256,
+      "graph": 149,
+      "teacher": 108
+    },
+    {
+      "moves": 96,
+      "max": 64,
+      "graph": 69,
+      "teacher": 27
+    },
+    {
+      "moves": 87,
+      "max": 64,
+      "graph": 72,
+      "teacher": 15
+    }
+  ],
+  "first3_avg": 384.0,
+  "last3_avg": 426.6666666666667,
+  "best_episode_max": 1024,
+  "rules": 302
+}

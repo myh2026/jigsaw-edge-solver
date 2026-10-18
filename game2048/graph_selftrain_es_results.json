@@ -1,0 +1,121 @@
+{
+  "w0": [
+    2.7,
+    -0.6,
+    -0.35,
+    4.0,
+    1.4,
+    3.2
+  ],
+  "w_best": [
+    2.5312858056382095,
+    -1.075138786886213,
+    0.9035387341778922,
+    3.7982082376191677,
+    1.9101453607280736,
+    3.897250459023847
+  ],
+  "history": [
+    {
+      "gen": 0,
+      "fit": 192.0,
+      "adopted": true
+    },
+    {
+      "gen": 1,
+      "fit": 256.0,
+      "adopted": true
+    },
+    {
+      "gen": 2,
+      "fit": 384.0,
+      "adopted": true
+    },
+    {
+      "gen": 3,
+      "fit": 512.0,
+      "adopted": true
+    },
+    {
+      "gen": 4,
+      "fit": 512.0,
+      "adopted": false
+    },
+    {
+      "gen": 5,
+      "fit": 512.0,
+      "adopted": false
+    },
+    {
+      "gen": 6,
+      "fit": 512.0,
+      "adopted": false
+    },
+    {
+      "gen": 7,
+      "fit": 512.0,
+      "adopted": false
+    },
+    {
+      "gen": 8,
+      "fit": 512.0,
+      "adopted": false
+    },
+    {
+      "gen": 9,
+      "fit": 512.0,
+      "adopted": false
+    },
+    {
+      "gen": 10,
+      "fit": 512.0,
+      "adopted": false
+    },
+    {
+      "gen": 11,
+      "fit": 512.0,
+      "adopted": false
+    },
+    {
+      "gen": 12,
+      "fit": 512.0,
+      "adopted": false
+    },
+    {
+      "gen": 13,
+      "fit": 512.0,
+      "adopted": false
+    },
+    {
+      "gen": 14,
+      "fit": 512.0,
+      "adopted": false
+    },
+    {
+      "gen": 15,
+      "fit": 512.0,
+      "adopted": false
+    },
+    {
+      "gen": 16,
+      "fit": 512.0,
+      "adopted": false
+    }
+  ],
+  "initial_avg": 192.0,
+  "trained_avg": 213.33333333333334,
+  "final_games": [
+    {
+      "max": 256,
+      "moves": 242
+    },
+    {
+      "max": 128,
+      "moves": 151
+    },
+    {
+      "max": 256,
+      "moves": 369
+    }
+  ]
+}

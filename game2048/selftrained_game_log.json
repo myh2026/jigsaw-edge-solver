@@ -1,0 +1,60 @@
+{
+  "policy": "self-trained weights via ES self-play (graph_selftrain_es.py)",
+  "weights": [
+    2.53,
+    -1.08,
+    0.9,
+    3.8,
+    1.91,
+    3.9
+  ],
+  "search_depth": "3-4",
+  "milestones": {
+    "1024": {
+      "moves": 527,
+      "score": 9576
+    },
+    "2048": {
+      "moves": 1031,
+      "score": 21204
+    }
+  },
+  "final": {
+    "moves": 1323,
+    "score": 25600,
+    "max_tile": 2048,
+    "over": true,
+    "board": [
+      [
+        4,
+        16,
+        4,
+        2
+      ],
+      [
+        16,
+        512,
+        128,
+        32
+      ],
+      [
+        8,
+        64,
+        2,
+        8
+      ],
+      [
+        4,
+        8,
+        32,
+        2048
+      ]
+    ]
+  },
+  "baseline_hand_tuned": {
+    "max_tile": 2048,
+    "moves": 973,
+    "score_at_win": 20268,
+    "note": "stopped at victory, not played to game over"
+  }
+}
