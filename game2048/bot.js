@@ -36,11 +36,16 @@
   var ROW_L = new Uint16Array(65536), ROW_R = new Uint16Array(65536);
   for (var r0 = 0; r0 < 65536; r0++) {
     var cc = [(r0>>12)&15,(r0>>8)&15,(r0>>4)&15,r0&15], src = cc.filter(function(v){return v;});
-    var outL = [], outR = [];
-    for (var i = 0; i < src.length; i++) {
-      if (i+1 < src.length && src[i] === src[i+1]) { outL.push(src[i]+1); outR.unshift(src[i]+1); i++; }
-      else { outL.push(src[i]); outR.unshift(src[i]); }
+    function mergeLeft(seq) {
+      var out = [], i = 0;
+      while (i < seq.length) {
+        if (i+1 < seq.length && seq[i] === seq[i+1]) { out.push(seq[i]+1); i += 2; }
+        else { out.push(seq[i]); i += 1; }
+      }
+      return out;
     }
+    var outL = mergeLeft(src);
+    var outR = mergeLeft(src.slice().reverse()).reverse();  // 右移=从右配对合并
     while (outL.length < 4) outL.push(0);
     while (outR.length < 4) outR.unshift(0);
     ROW_L[r0] = (outL[0]<<12)|(outL[1]<<8)|(outL[2]<<4)|outL[3];

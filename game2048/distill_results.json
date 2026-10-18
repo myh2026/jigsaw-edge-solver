@@ -1,0 +1,108 @@
+{
+  "study": [
+    {
+      "moves": 778,
+      "max_tile": 1024,
+      "teacher_ms_avg": 41.18247467866275
+    },
+    {
+      "moves": 272,
+      "max_tile": 256,
+      "teacher_ms_avg": 34.58536544117709
+    },
+    {
+      "moves": 477,
+      "max_tile": 512,
+      "teacher_ms_avg": 36.76467903563934
+    },
+    {
+      "moves": 666,
+      "max_tile": 1024,
+      "teacher_ms_avg": 33.74075690690755
+    },
+    {
+      "moves": 357,
+      "max_tile": 512,
+      "teacher_ms_avg": 45.36018795518255
+    },
+    {
+      "moves": 482,
+      "max_tile": 512,
+      "teacher_ms_avg": 32.484770124482054
+    },
+    {
+      "moves": 318,
+      "max_tile": 256,
+      "teacher_ms_avg": 38.61283773584947
+    },
+    {
+      "moves": 454,
+      "max_tile": 512,
+      "teacher_ms_avg": 40.50133281938306
+    },
+    {
+      "moves": 339,
+      "max_tile": 512,
+      "teacher_ms_avg": 42.967248082596214
+    },
+    {
+      "moves": 502,
+      "max_tile": 512,
+      "teacher_ms_avg": 35.03199003984042
+    }
+  ],
+  "samples": 4645,
+  "holdout_agreement": 0.4510226049515608,
+  "pure": [
+    {
+      "moves": 72,
+      "max_tile": 64,
+      "teacher_calls": 0,
+      "tree_decisions": 72,
+      "teacher_ms_total": 0.0,
+      "tree_ms_total": 1832.3040999997602
+    },
+    {
+      "moves": 72,
+      "max_tile": 64,
+      "teacher_calls": 0,
+      "tree_decisions": 72,
+      "teacher_ms_total": 0.0,
+      "tree_ms_total": 1977.884700000061
+    },
+    {
+      "moves": 31,
+      "max_tile": 8,
+      "teacher_calls": 0,
+      "tree_decisions": 31,
+      "teacher_ms_total": 0.0,
+      "tree_ms_total": 849.1749000000937
+    }
+  ],
+  "hybrid": [
+    {
+      "moves": 85,
+      "max_tile": 64,
+      "teacher_calls": 9,
+      "tree_decisions": 76,
+      "teacher_ms_total": 207.23910000003798,
+      "tree_ms_total": 1967.6489999995397
+    },
+    {
+      "moves": 81,
+      "max_tile": 64,
+      "teacher_calls": 12,
+      "tree_decisions": 69,
+      "teacher_ms_total": 295.57550000004085,
+      "tree_ms_total": 1945.9890000001678
+    },
+    {
+      "moves": 130,
+      "max_tile": 128,
+      "teacher_calls": 19,
+      "tree_decisions": 111,
+      "teacher_ms_total": 862.6626999999303,
+      "tree_ms_total": 2943.2169000000385
+    }
+  ]
+}
